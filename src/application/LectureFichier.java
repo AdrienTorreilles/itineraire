@@ -105,8 +105,8 @@ public class LectureFichier {
 		File fichier = new File(rep, "map5.txt");
 		try {
 			LectureFichier lecture = new LectureFichier();
-			lecture.LectureMapFichier(fichier);
 			lecture.lectureInfoFichier(fichier);
+			lecture.LectureMapFichier(fichier);
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 			return;
