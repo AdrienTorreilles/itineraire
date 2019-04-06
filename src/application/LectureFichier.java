@@ -21,46 +21,56 @@ public class LectureFichier {
 	private static Position depart;
 	private static Position arrive;
 
+	
+	/*
+	 * Permet de retourner une matrice de int a 2 dimensions d'un fichier texte Lu
+	 * 
+	 * 
+	 */
 	public int[][] LectureMapFichier(File fichier, int x, int y) throws Exception {
 
 		int[][] matrice = new int[x][y];
 
-		int nbx = 0;
-		int nby = 0;
+		int matriceX = 0; 
+		int matriceY = 0;
 		int nbLignes = 0;
+		
 		try (BufferedReader br = new BufferedReader(new FileReader(fichier))) {
-			int caract = 2;
+			int caract = 2; // Il se peut qu'il n'est pas de caracteres dans un fichier donc on met une valeur par defaut
 			while (caract != -1) {
 				caract = br.read();
 				if (nbLignes <= 3) {
+					// Passe les 4 lignes d'information du fichier (Nom / depart / arriver / taille)
 					if ((char) caract == '\n') {
 						nbLignes += 1;
 						caract = br.read();
 					}
 				} else {
+					//traite les caracteres lu
 					if (Character.isWhitespace(caract)) {
 						if ((char) caract == '\r') {
+							//premier caractere qui permet le retour a la ligne mais qu'on doit ignorer
 							System.out.print("");
 						} else if ((char) caract == '\n') {
+							//retour a la ligne
 							System.out.print((char) caract);
-							nbx = 0;
-							nby++;
+							matriceX = 0;
+							matriceY++;
 						} else {
-							System.out.print(" "); // pour l'affichage
-							matrice[nby][nbx] = 0;
-							nbx++;
+							System.out.print(" "); // pour l'affichage du franchissable
+							matrice[matriceY][matriceX] = -1;
+							matriceX++;
 						}
 					} else {
-						System.out.print("X"); // pour l'affichage (char) caract
-						matrice[nby][nbx] = -1;
-						nbx++;
+						System.out.print("X"); // pour l'affichage  des murs
+						matrice[matriceY][matriceX] = -2;
+						matriceX++;
 					}
 				}
 
 			}
 
 		} catch (FileNotFoundException e) {
-
 			System.out.println(e.getMessage());
 		} catch (IOException e) { //
 			System.out.println(e.getMessage());
@@ -69,19 +79,46 @@ public class LectureFichier {
 
 	}
 
+	/*
+	 * Affiche une matrice de int a 2 dimensions dans un TextArea
+	 */
 	public void affichageMap(int[][] matrice, TextArea textArea) throws Exception {
 
-		for (int[] x1 : matrice) {
-			for (int y1 : x1) {
-				System.out.print(y1 + " ");
-				textArea.setText(textArea.getText() + y1);
+		for (int[] x : matrice) {
+			for (int y : x) {
+				System.out.print(y + " ");
+				if (y == -2) {
+					textArea.setText(textArea.getText() + "X");
+				} else if (y == -1){
+					textArea.setText(textArea.getText() + " ");
+				} else {
+					textArea.setText(textArea.getText() + y);
+				}
 			}
 			System.out.println();
 			textArea.setText(textArea.getText() + "\n");
 		}
 
 	}
+	
+	/*
+	 * Affiche une matrice de int a 2 dimensions dans la console
+	 */
+	public void affichageMapConsole(int[][] matrice) throws Exception {
 
+		for (int[] x1 : matrice) {
+			for (int y1 : x1) {
+				System.out.print(y1 + " ");
+			}
+			System.out.println();
+		}
+
+	}
+
+
+	/*
+	 * Permet de lire les 4 lignes d'information d'un fichier labyrinthe
+	 */
 	public String[] lectureInfoFichier(File fichier) {
 
 		int nbLignes = 0;
@@ -132,6 +169,9 @@ public class LectureFichier {
 		return informationMatrice;
 	}
 
+	/*
+	 * Ajoute le nom des fichiers texte se situant dans le dossier map du projet dans une ChoiceBox
+	 */
 	public void lectureListMap(ChoiceBox choiceBox) {
 		choiceBox.getItems().clear();
 		File dossier = new File(System.getProperty("user.dir"), "map\\");
@@ -140,16 +180,31 @@ public class LectureFichier {
 		for (int i = 0; i < listeDeFichiers.length; i++) {
 			if (listeDeFichiers[i].isFile()) {
 				choiceBox.getItems().add(listeDeFichiers[i].getName());
-				// System.out.println(listeDeFichiers[i].getName());
 			}
 		}
 	}
-	
+
+	/*
+	 * Ajoute le depart et l'arrive dans une matrice
+	 */
 	public void ajoutPoint(int[][] matrice, Position depart, Position arrive) {
 		matrice[depart.getX()][depart.getY()] = 9;
 		matrice[arrive.getX()][arrive.getY()] = 8;
 	}
 
+	/*
+	 * Ajoute le chemin de possition dans une matrice
+	 */
+	public void ajoutChemin(int[][] matrice, Position[] chemin) {
+
+		for (int i = 0; i < chemin.length; i++) {
+			matrice[chemin[i].getX()][chemin[i].getY()] = 1;
+		}
+	}
+
+	/*
+	 * Tests unitaires
+	 */
 	public static void main(String[] args) {
 		File rep = new File(System.getProperty("user.dir"), "map\\");
 		File fichier = new File(rep, "map.txt");
@@ -159,7 +214,14 @@ public class LectureFichier {
 			LectureFichier lecture = new LectureFichier();
 			// lecture.lectureMap();
 			// lecture.lectureInfoFichier(fichier);
-			lecture.LectureMapFichier(fichier, 40, 80);
+			int[][] matriceTest = lecture.LectureMapFichier(fichier, 40, 80);
+			Position[] matriceChemin = new Position[10];
+			for (int i = 0; i<10; i++) {
+				matriceChemin[i] = new Position(1, i);
+			}
+			lecture.ajoutChemin(matriceTest, matriceChemin);
+			lecture.affichageMapConsole(matriceTest);
+			
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 			return;

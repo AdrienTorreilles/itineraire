@@ -19,7 +19,7 @@
                   <Font size="14.0" />
                </font>
             </Label>
-            <ChoiceBox fx:id="choiceBoxMap" prefWidth="150.0">
+            <ChoiceBox fx:id="choiceBoxMap" onAction="#choixMap" prefWidth="150.0">
                <VBox.margin>
                   <Insets bottom="10.0" top="5.0" />
                </VBox.margin>
@@ -38,7 +38,7 @@
                   <Insets bottom="10.0" top="5.0" />
                </VBox.margin>
             </ChoiceBox>
-            <Button fx:id="buttonResoudre" alignment="CENTER" mnemonicParsing="false" onAction="#choixMap" text="Résoudre" />
+            <Button fx:id="buttonResoudre" alignment="CENTER" mnemonicParsing="false" onAction="#actionResoudre" text="Résoudre" />
          </children>
       </VBox>
    </right>
