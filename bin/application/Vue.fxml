@@ -7,8 +7,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.BorderPane?>
 
-
-<BorderPane prefHeight="800.0" prefWidth="1000.0" style="-fx-background-color: #F3F3F3;" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8" fx:controller="application.Controller">
+<BorderPane prefHeight="800.0" prefWidth="1000.0" style="-fx-background-color: #F3F3F3;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.Controller">
    <right>
       <VBox alignment="CENTER" prefHeight="725.0" prefWidth="212.0" style="-fx-background-color: #CDCDCD;" BorderPane.alignment="CENTER">
          <BorderPane.margin>
@@ -20,12 +19,12 @@
                   <Font size="14.0" />
                </font>
             </Label>
-            <ChoiceBox prefWidth="150.0">
+            <ChoiceBox fx:id="choiceBoxMap" prefWidth="150.0">
                <VBox.margin>
                   <Insets bottom="10.0" top="5.0" />
                </VBox.margin>
             </ChoiceBox>
-            <Button mnemonicParsing="false" text="Rafraichir" />
+            <Button fx:id="buttonMap" mnemonicParsing="false" onAction="#actionRafraichir" text="Rafraichir" />
             <Label text="Choix de l'algorithme :" textAlignment="CENTER">
                <VBox.margin>
                   <Insets top="85.0" />
@@ -34,12 +33,12 @@
                   <Font size="14.0" />
                </font>
             </Label>
-            <ChoiceBox prefWidth="150.0">
+            <ChoiceBox fx:id="choiceBoxAlgo" prefWidth="150.0">
                <VBox.margin>
                   <Insets bottom="10.0" top="5.0" />
                </VBox.margin>
             </ChoiceBox>
-            <Button alignment="CENTER" mnemonicParsing="false" text="Résoudre" />
+            <Button fx:id="buttonResoudre" alignment="CENTER" mnemonicParsing="false" onAction="#choixMap" text="Résoudre" />
          </children>
       </VBox>
    </right>
@@ -69,7 +68,7 @@
                         <Insets />
                      </VBox.margin>
                   </Label>
-                  <Label text="0.000 ms" />
+                  <Label fx:id="labelTemps" text="0.000 ms" />
                </children>
             </VBox>
          </left>
@@ -81,10 +80,20 @@
                         <Font size="14.0" />
                      </font>
                   </Label>
-                  <Label text="0" />
+                  <Label fx:id="labelEtape" text="0" />
                </children>
             </VBox>
          </right>
       </BorderPane>
    </top>
+   <center>
+      <TextArea fx:id="textAreaMatrice" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+         <BorderPane.margin>
+            <Insets bottom="10.0" left="10.0" right="1.0" top="1.0" />
+         </BorderPane.margin>
+         <font>
+            <Font name="Monospaced Regular" size="13.0" />
+         </font>
+      </TextArea>
+   </center>
 </BorderPane>
