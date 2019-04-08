@@ -40,9 +40,10 @@ public class Controller {
 		choiceBoxAlgo.getItems().add("Parcours");
 		choiceBoxAlgo.getItems().add("Etoiles");
 		choiceBoxMap.setValue(choiceBoxMap.getItems().get(0));
+		choiceBoxAlgo.setValue(choiceBoxAlgo.getItems().get(0));
 	}
 
-	/*
+	/**
 	 * Action qui s'execute au changement du choix de labyrinthe
 	 */
 	@FXML
@@ -53,13 +54,13 @@ public class Controller {
 		String[] informationMatrice;
 		LectureFichier lecture = new LectureFichier();
 		informationMatrice = lecture.lectureInfoFichier(fichier);
-		int[][] matrice = lecture.LectureMapFichier(fichier, Integer.parseInt(informationMatrice[5]),
+		char[][] matrice = lecture.LectureMapFichier(fichier, Integer.parseInt(informationMatrice[5]),
 				Integer.parseInt(informationMatrice[6]));
 		lecture.ajoutPoint(matrice, lecture.getDepart(), lecture.getArrive());
 		lecture.affichageMap(matrice, textAreaMatrice);
 	}
 
-	/*
+	/**
 	 * S'execute a l'appuie du bouton "Rafraichir"
 	 */
 	@FXML
@@ -68,7 +69,7 @@ public class Controller {
 		lecture.lectureListMap(choiceBoxMap);
 	}
 
-	/*
+	/**
 	 * Action qu'execute le bouton "Résoudre"
 	 */
 	@FXML
@@ -79,13 +80,26 @@ public class Controller {
 		String[] informationMatrice;
 		LectureFichier lecture = new LectureFichier();
 		informationMatrice = lecture.lectureInfoFichier(fichier);
-		int[][] matrice = lecture.LectureMapFichier(fichier, Integer.parseInt(informationMatrice[5]),
+		char[][] matrice = lecture.LectureMapFichier(fichier, Integer.parseInt(informationMatrice[5]),
 				Integer.parseInt(informationMatrice[6]));
 		// Matrice a resoudre
 		// doit renvoyer une liste de position "chemin"
 
-		Position[] chemin = new Position[1];
-		chemin[0] = new Position(1,3);
+		Position[] chemin = new Position[12];
+		chemin[0] = new Position(2,1);
+		chemin[1] = new Position(3,1);
+		chemin[2] = new Position(3,2);
+		chemin[3] = new Position(3,3);
+		chemin[4] = new Position(3,4);
+		chemin[5] = new Position(2,4);
+		chemin[6] = new Position(2,5);
+		chemin[7] = new Position(1,5);
+		chemin[8] = new Position(1,6);
+		chemin[9] = new Position(1,7);
+		chemin[10] = new Position(1,8);
+		chemin[11] = new Position(2,8);
+
+		lecture.ajoutPoint(matrice, lecture.getDepart(), lecture.getArrive());
 		lecture.ajoutChemin(matrice, chemin);
 		lecture.affichageMap(matrice, textAreaMatrice);
 	}

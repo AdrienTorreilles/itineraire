@@ -22,14 +22,14 @@ public class LectureFichier {
 	private static Position arrive;
 
 	
-	/*
+	/**
 	 * Permet de retourner une matrice de int a 2 dimensions d'un fichier texte Lu
 	 * 
 	 * 
 	 */
-	public int[][] LectureMapFichier(File fichier, int x, int y) throws Exception {
+	public char[][] LectureMapFichier(File fichier, int x, int y) throws Exception {
 
-		int[][] matrice = new int[x][y];
+		char[][] matrice = new char[x][y];
 
 		int matriceX = 0; 
 		int matriceY = 0;
@@ -58,12 +58,12 @@ public class LectureFichier {
 							matriceY++;
 						} else {
 							System.out.print(" "); // pour l'affichage du franchissable
-							matrice[matriceY][matriceX] = -1;
+							matrice[matriceY][matriceX] = '1';
 							matriceX++;
 						}
 					} else {
 						System.out.print("X"); // pour l'affichage  des murs
-						matrice[matriceY][matriceX] = -2;
+						matrice[matriceY][matriceX] = 'X';
 						matriceX++;
 					}
 				}
@@ -79,20 +79,28 @@ public class LectureFichier {
 
 	}
 
-	/*
+	/**
 	 * Affiche une matrice de int a 2 dimensions dans un TextArea
 	 */
-	public void affichageMap(int[][] matrice, TextArea textArea) throws Exception {
+	public void affichageMap(char[][] matrice, TextArea textArea) throws Exception {
 
-		for (int[] x : matrice) {
-			for (int y : x) {
+		System.out.println();
+		for (char[] x : matrice) {
+			for (char y : x) {
 				System.out.print(y + " ");
-				if (y == -2) {
+				if (y == 'X') {
 					textArea.setText(textArea.getText() + "X");
-				} else if (y == -1){
+				} else if (y == '1'){
 					textArea.setText(textArea.getText() + " ");
 				} else {
-					textArea.setText(textArea.getText() + y);
+					if (y == 'D') {
+						textArea.setText(textArea.getText() + "D");
+					} else if (y == 'A'){
+						textArea.setText(textArea.getText() + "A");
+					} else {
+						textArea.setText(textArea.getText() + y);
+					}
+					
 				}
 			}
 			System.out.println();
@@ -101,13 +109,14 @@ public class LectureFichier {
 
 	}
 	
-	/*
+	/**
 	 * Affiche une matrice de int a 2 dimensions dans la console
 	 */
-	public void affichageMapConsole(int[][] matrice) throws Exception {
+	public void affichageMapConsole(char[][] matrice) throws Exception {
 
-		for (int[] x1 : matrice) {
-			for (int y1 : x1) {
+		System.out.println();
+		for (char[] x1 : matrice) {
+			for (char y1 : x1) {
 				System.out.print(y1 + " ");
 			}
 			System.out.println();
@@ -116,7 +125,7 @@ public class LectureFichier {
 	}
 
 
-	/*
+	/**
 	 * Permet de lire les 4 lignes d'information d'un fichier labyrinthe
 	 */
 	public String[] lectureInfoFichier(File fichier) {
@@ -169,7 +178,7 @@ public class LectureFichier {
 		return informationMatrice;
 	}
 
-	/*
+	/**
 	 * Ajoute le nom des fichiers texte se situant dans le dossier map du projet dans une ChoiceBox
 	 */
 	public void lectureListMap(ChoiceBox choiceBox) {
@@ -182,27 +191,28 @@ public class LectureFichier {
 				choiceBox.getItems().add(listeDeFichiers[i].getName());
 			}
 		}
+		choiceBox.setValue(choiceBox.getItems().get(0));
 	}
 
-	/*
+	/**
 	 * Ajoute le depart et l'arrive dans une matrice
 	 */
-	public void ajoutPoint(int[][] matrice, Position depart, Position arrive) {
-		matrice[depart.getX()][depart.getY()] = 9;
-		matrice[arrive.getX()][arrive.getY()] = 8;
+	public void ajoutPoint(char[][] matrice, Position depart, Position arrive) {
+		matrice[depart.getX()][depart.getY()] = 'D';
+		matrice[arrive.getX()][arrive.getY()] = 'A';
 	}
 
-	/*
+	/**
 	 * Ajoute le chemin de possition dans une matrice
 	 */
-	public void ajoutChemin(int[][] matrice, Position[] chemin) {
+	public void ajoutChemin(char[][] matrice, Position[] chemin) {
 
 		for (int i = 0; i < chemin.length; i++) {
-			matrice[chemin[i].getX()][chemin[i].getY()] = 1;
+			matrice[chemin[i].getX()][chemin[i].getY()] = '0';
 		}
 	}
 
-	/*
+	/**
 	 * Tests unitaires
 	 */
 	public static void main(String[] args) {
@@ -214,7 +224,7 @@ public class LectureFichier {
 			LectureFichier lecture = new LectureFichier();
 			// lecture.lectureMap();
 			// lecture.lectureInfoFichier(fichier);
-			int[][] matriceTest = lecture.LectureMapFichier(fichier, 40, 80);
+			char[][] matriceTest = lecture.LectureMapFichier(fichier, 40, 80);
 			Position[] matriceChemin = new Position[10];
 			for (int i = 0; i<10; i++) {
 				matriceChemin[i] = new Position(1, i);
