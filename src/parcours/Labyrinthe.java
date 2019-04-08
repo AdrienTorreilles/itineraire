@@ -1,5 +1,5 @@
 package parcours;
 
-public class Labyrinthe implements Explorable {
+public abstract class Labyrinthe implements Explorable {
 
 }
