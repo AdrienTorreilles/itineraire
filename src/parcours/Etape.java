@@ -1,4 +1,4 @@
-package parcours;
+package gestionAlgorithme;
 
 public class Etape<E> {
 

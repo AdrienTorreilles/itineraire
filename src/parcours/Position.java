@@ -1,25 +1,18 @@
-package parcours;
+package gestionAlgorithme;
 
 public class Position {
 
 	
 	private int x,y;
 	
-	private Position precedente;
 	
-	public Position(int x, int y,Position precedente) {
+		public Position(int x,int y) {
 		this.x=x;
 		this.y=y;
-		this.precedente=precedente;
+	
 	}
 	
-	public Position getPrecedente() {
-		return precedente;
-	}
-
-	public void setPrecedente(Position precedente) {
-		this.precedente = precedente;
-	}
+	
 
 	public Position() {
 		

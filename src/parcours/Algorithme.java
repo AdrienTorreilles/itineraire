@@ -1,4 +1,4 @@
-package parcours;
+package gestionAlgorithme;
 
 import java.util.HashSet;
 
@@ -47,13 +47,12 @@ public class Algorithme {
 
 		}
 		if(fin){
-			parcours.ajouter(parcours.longueur()+1, etape.element());
+			parcours.ajouter(1, etape.element());
 			while( etape.precedent()!=null ) {
 				etape = etape.precedent();
 				if(etape !=null) {
-					System.out.println(parcours.hashCode());
-					System.out.println(parcours.longueur());
-					parcours.ajouter(parcours.longueur()+1, etape.element());
+				
+					parcours.ajouter(1, etape.element());
 				}
 			}
 

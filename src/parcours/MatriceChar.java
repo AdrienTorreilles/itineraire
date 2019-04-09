@@ -1,4 +1,4 @@
-package parcours;
+package gestionAlgorithme;
 
 import structuresLineaires.Liste;
 import structuresLineaires.ListeChainee;
@@ -9,6 +9,8 @@ public class MatriceChar implements Explorable<Position> {
 
 	public Position debut;
 	public Position fin;
+	public Liste<Position> murs;
+	public char mur='M';
 	public char[][] matriceChar;
 	public int nblignes,nbcolonnes;
 
@@ -35,6 +37,52 @@ public class MatriceChar implements Explorable<Position> {
 		
 
 	}
+	
+	public void creerMurs(Liste<Position> murs) {
+	
+		for(Position item : murs) {
+			if(isOut(item)) throw new OutOfMatriceException();
+			matriceChar[item.getX()][item.getY()]=mur;
+		}
+	}
+	
+	public void ajouterParcours(Liste<Position> parcours) {
+		for(Position item : parcours) {
+			if(isOut(item)) throw new OutOfMatriceException();
+			if(estVide(item))
+			matriceChar[item.getX()][item.getY()]='1';
+		}
+	}
+	
+	public char getMur() {
+		return mur;
+	}
+	
+	
+	public void setMur(char mur) {
+		this.mur = mur;
+	}
+
+	public boolean isOut(Position position) {
+		if(position.getX()<0||position.getX()>nblignes-1||position.getY()<0||position.getY()>nbcolonnes-1) {
+			return true;
+		}else { return false;}
+	}
+
+
+	public boolean estMur(Position p) {
+		
+		if(matriceChar[p.getX()][p.getY()]==mur) return true;
+		else return false;
+		
+	}
+	
+	public boolean estVide(Position p) {
+		
+		if(matriceChar[p.getX()][p.getY()]==' ') return true;
+		else return false;
+		
+	}
 
 	public void ajouterElement(Position p, char c) {
 
@@ -42,7 +90,7 @@ public class MatriceChar implements Explorable<Position> {
 
 	}
 
-	public void SupprimerElement(Position p) {
+	public void supprimerElement(Position p) {
 		this.matriceChar[p.getX()][p.getY()]=' ';
 	}
 
@@ -68,13 +116,14 @@ public class MatriceChar implements Explorable<Position> {
 		Liste<Position> etapesSuivantes= new ListeChainee<>();
 
 		
-		etapesSuivantes.ajouter(1,new Position(position.getX()+1,position.getY(),position.getPrecedente()));
-		etapesSuivantes.ajouter(1,new Position(position.getX(),position.getY()+1,position.getPrecedente()));
-		etapesSuivantes.ajouter(1,new Position(position.getX()-1,position.getY(),position.getPrecedente()));
-		etapesSuivantes.ajouter(1,new Position(position.getX(),position.getY()-1,position.getPrecedente()));
+		etapesSuivantes.ajouter(1,new Position(position.getX()+1,position.getY()));
+		etapesSuivantes.ajouter(1,new Position(position.getX(),position.getY()+1));
+		etapesSuivantes.ajouter(1,new Position(position.getX()-1,position.getY()));
+		etapesSuivantes.ajouter(1,new Position(position.getX(),position.getY()-1));
 		for(int i=1; i<etapesSuivantes.longueur()+1; i++){
-			if(etapesSuivantes.ieme(i).getX()==position.getX()&&etapesSuivantes.ieme(i).getY()==position.getY()){
-		etapesSuivantes.supprimer(i);
+			if(isOut(etapesSuivantes.ieme(i))) etapesSuivantes.supprimer(i);
+			else if(estMur(etapesSuivantes.ieme(i)) ){
+				etapesSuivantes.supprimer(i);
 			}
 		
 		}
@@ -92,6 +141,20 @@ public class MatriceChar implements Explorable<Position> {
 		if(position.getX()==fin.getX()&&position.getY()==fin.getY()) return true;
 		else return false;
 
+	}
+	
+	public void afficher() {
+		
+		for(int i = 0; i< nblignes; i++) {
+			String s ="=";
+			String t ="|";
+			for(int j=0; j<nbcolonnes; j++) {
+				t=t+matriceChar[i][j]+"|";
+				s=s +"==";
+			}
+			System.out.println(t);
+			System.out.println(s);
+		}
 	}
 
 
