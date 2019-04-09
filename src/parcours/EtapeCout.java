@@ -1,4 +1,4 @@
-package gestionAlgorithme;
+package parcours;
 
 public class EtapeCout<E>  extends Etape<E>{
 

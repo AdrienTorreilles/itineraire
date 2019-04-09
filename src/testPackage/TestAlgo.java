@@ -1,8 +1,8 @@
 package testPackage;
 
-import gestionAlgorithme.Algorithme;
-import gestionAlgorithme.MatriceChar;
-import gestionAlgorithme.Position;
+import parcours.Algorithme;
+import parcours.MatriceChar;
+import parcours.Position;
 import structuresLineaires.Liste;
 import structuresLineaires.ListeChainee;
 

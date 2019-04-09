@@ -58,12 +58,12 @@ public class LectureFichier {
 							matriceY++;
 						} else {
 							System.out.print(" "); // pour l'affichage du franchissable
-							matrice[matriceY][matriceX] = '1';
+							matrice[matriceY][matriceX] = ' ';
 							matriceX++;
 						}
 					} else {
 						System.out.print("X"); // pour l'affichage  des murs
-						matrice[matriceY][matriceX] = 'X';
+						matrice[matriceY][matriceX] = 'M';
 						matriceX++;
 					}
 				}
@@ -90,14 +90,16 @@ public class LectureFichier {
 				System.out.print(y + " ");
 				if (y == 'X') {
 					textArea.setText(textArea.getText() + "X");
-				} else if (y == '1'){
+				} else if (y == ' '){
 					textArea.setText(textArea.getText() + " ");
 				} else {
 					if (y == 'D') {
 						textArea.setText(textArea.getText() + "D");
 					} else if (y == 'A'){
 						textArea.setText(textArea.getText() + "A");
-					} else {
+					} else if (y == '1'){
+						textArea.setText(textArea.getText() + "1");
+					}else {
 						textArea.setText(textArea.getText() + y);
 					}
 					
