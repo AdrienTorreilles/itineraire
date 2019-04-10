@@ -24,8 +24,11 @@ public class LectureFichier {
 	
 	/**
 	 * Permet de retourner une matrice de int a 2 dimensions d'un fichier texte Lu
-	 * 
-	 * 
+	 * @param fichier
+	 * @param x
+	 * @param y
+	 * @return
+	 * @throws Exception
 	 */
 	public char[][] LectureMapFichier(File fichier, int x, int y) throws Exception {
 

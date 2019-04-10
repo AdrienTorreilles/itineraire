@@ -5,7 +5,7 @@ import structuresLineaires.Liste;
 import structuresLineaires.ListeChainee;
 import structuresLineaires.ListeTableau;
 
-public class MatriceChar implements Explorable<Position> {
+public class MatriceChar implements Explorable<Position>, ArriveeEstimee<Position> {
 
 	public Position debut;
 	public Position fin;
@@ -14,6 +14,13 @@ public class MatriceChar implements Explorable<Position> {
 	public char[][] matriceChar;
 	public int nblignes, nbcolonnes;
 
+	/**
+	 * Objet Explorable representant une matrice de char
+	 * @param nblignes
+	 * @param nbcolonnes
+	 * @param debut
+	 * @param fin
+	 */
 	public MatriceChar(int nblignes, int nbcolonnes, Position debut, Position fin) {
 		this.nblignes = nblignes;
 		this.nbcolonnes = nbcolonnes;
@@ -130,8 +137,11 @@ public class MatriceChar implements Explorable<Position> {
 		Position p;
 		
 
+		
 		p= new Position(position.getX()+1,position.getY());
+		// On vérifie d'abord que la position est bien définie dans la matrice
 		if(!(isOut(p))){
+			// Puis si c'est un mur
 			if(!(estMur(p))) etapesSuivantes.ajouter(1,p);
 		}
 		p=new Position(position.getX(),position.getY()+1);
@@ -153,13 +163,11 @@ public class MatriceChar implements Explorable<Position> {
 		return etapesSuivantes;
 	}
 
-	@Override
+	
 	public Position etapeInit() {
-		// TODO Auto-generated method stub
 		return this.debut;
 	}
 
-	@Override
 	public boolean estArrive(Position position) {
 		if (position.getX() == fin.getX() && position.getY() == fin.getY())
 			return true;
@@ -168,6 +176,9 @@ public class MatriceChar implements Explorable<Position> {
 
 	}
 
+	/**
+	 * affiche la matrice, utile pour les tests
+	 */
 	public void afficher() {
 
 		for (int i = 0; i < nblignes; i++) {
@@ -204,6 +215,14 @@ public class MatriceChar implements Explorable<Position> {
 
 	public void setMatriceChar(char[][] matriceChar) {
 		this.matriceChar = matriceChar;
+	}
+
+	/**
+	 * méthode spécifique à l'utilisation de Algorithme.parcoursAstar
+	 * 
+	 */
+	public double calculEuclidien(Position e1, Position e2) {
+		return Math.sqrt((e1.getX()-e2.getX())*(e1.getX()-e2.getX()) + (e1.getY()-e2.getY())*(e1.getY()-e2.getY()));
 	}
 
 }

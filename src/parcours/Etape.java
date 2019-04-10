@@ -19,7 +19,8 @@ public class Etape<E> {
 	}
 	
 	/**
-	 * renvoie vrai si les étapes sont égales
+	 * renvoie vrai si les étapes sont égales, à redefinir dans l'élément E
+	 * exemple: voir class Position
 	 */
 	@Override
 	public boolean equals(Object e) {
@@ -29,7 +30,8 @@ public class Etape<E> {
 	}
 	
 	/**
-	 * renvoie l'id de marquage
+	 * renvoie l'id de marquage, à redéfinir dans l'élement E
+	 * exemple: voir class Position
 	 */
 	@Override
 	public int hashCode() {

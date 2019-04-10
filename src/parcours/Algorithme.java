@@ -62,7 +62,7 @@ public class Algorithme {
 
 		return parcours;
 
-	};
+	}
 
 	public static <T extends Explorable<E>,E> Liste<E> parcoursAstar(T explorable) {
 		return null;

@@ -62,6 +62,7 @@ public class Controller {
 				Integer.parseInt(informationMatrice[6]));
 		lecture.ajoutPoint(matrice, lecture.getDepart(), lecture.getArrive());
 		lecture.affichageMap(matrice, textAreaMatrice);
+		labelTemps.setText("0  microsecondes");
 	}
 
 	/**
@@ -102,7 +103,8 @@ public class Controller {
 
 		long stop = System.nanoTime();
 		long tempsEcoule = stop - start;
-		labelTemps.setText(tempsEcoule/100 + " micro secondes");
+		labelTemps.setText(tempsEcoule/1000 + "  microsecondes");
+		//labelEtape.setText(parcours.longueur());
 		
 		labyrinthe.ajouterParcours(parcours);
 		lecture.affichageMap(labyrinthe.getMatriceChar(), textAreaMatrice);

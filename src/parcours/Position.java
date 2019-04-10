@@ -6,25 +6,14 @@ public class Position {
 
 	
 	private int x,y;
-	Position precedente;
 	
-		public Position getPrecedente() {
-		return precedente;
-	}
-
-
-
-	public void setPrecedente(Position precedente) {
-		this.precedente = precedente;
-	}
-
-
+	
+	
 
 		public Position(int x,int y) {
 		this.x=x;
 		this.y=y;
-		precedente=null;
-	
+		
 	}
 	
 	

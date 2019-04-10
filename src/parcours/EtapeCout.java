@@ -2,6 +2,8 @@ package parcours;
 
 public class EtapeCout<E>  extends Etape<E>{
 
+	
+	// à compléter
 	private double cout;
 	final double longueur=1;
 	
