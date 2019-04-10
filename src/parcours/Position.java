@@ -1,5 +1,7 @@
 package parcours;
 
+
+
 public class Position {
 
 	
@@ -47,7 +49,24 @@ public class Position {
 		this.y = y;
 	}
 
+
+	/**
+	 *  recuperer l'id du marquage
+	 */
+	@Override
 	public int hashCode() {
-		return 0;
-	};
+		
+	    return x * 31 + y;	
+	    };
+	
+	    /**
+	     * pour verifier l'egalité entre des positions
+	     */
+	    @Override
+	public boolean equals(Object o) {
+		if(!(o instanceof Position)) return false;
+		Position o2= (Position) o;
+		if(this.getX()==o2.getX()&&this.getY()==o2.getY()) return true;
+		else return false;
+	}
 }

@@ -7,10 +7,25 @@ import structuresLineaires.Liste;
 public interface Explorable<E> {
 
 
+	/**
+	 * 
+	 * @param e
+	 * @return la liste des étapes suivantes
+	 */
 	public  Liste<E> etapesSuivantes(E e);
 
+	/**
+	 * 
+	 * @return l'étape initiale
+	 */
 	public   E etapeInit();
 
+	
+	/**
+	 * 
+	 * @param e
+	 * @return true si e est l'étape d'arrivée
+	 */
 	public  boolean estArrive(E e);
 
 

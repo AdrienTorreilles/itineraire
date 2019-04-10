@@ -37,6 +37,7 @@ public class Algorithme {
 
 						if(!marque.contains(unSuivant)) {
 
+							marque.add(unSuivant);
 							etapes.ajouter(1, suivante);
 							file.enfiler(suivante);
 						}
@@ -63,6 +64,9 @@ public class Algorithme {
 
 	};
 
+	public static <T extends Explorable<E>,E> Liste<E> parcoursAstar(T explorable) {
+		return null;
+	}
 	/*public static <E extends Explorable<? super E>,T> void parcoursLargeurArbre(E explorable) {
 		FileChainee<ArbreQuaternaireChaine<T>> file = new FileChainee<ArbreQuaternaireChaine<T>>();
 		boolean fin =false;

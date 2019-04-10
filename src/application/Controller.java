@@ -88,13 +88,22 @@ public class Controller {
 				Integer.parseInt(informationMatrice[6]));
 		lecture.ajoutPoint(matrice, lecture.getDepart(), lecture.getArrive());
 		// Matrice a resoudre
-		// doit renvoyer une liste de position "chemin"
+		
 		
 		MatriceChar labyrinthe = new MatriceChar(matrice, lecture.getDepart(), lecture.getArrive(), Integer.parseInt(informationMatrice[5]),
 				Integer.parseInt(informationMatrice[6]));
 		Liste<Position> parcours = new ListeChainee<Position>();
+		
+		//timer:
+		long start = System.nanoTime();
+		
+		
 		parcours = Algorithme.parcoursLargeur(labyrinthe);
 
+		long stop = System.nanoTime();
+		long tempsEcoule = stop - start;
+		labelTemps.setText(tempsEcoule/100 + " micro secondes");
+		
 		labyrinthe.ajouterParcours(parcours);
 		lecture.affichageMap(labyrinthe.getMatriceChar(), textAreaMatrice);
 	}

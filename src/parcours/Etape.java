@@ -17,4 +17,23 @@ public class Etape<E> {
 	public Etape<E> precedent(){
 		return precedent;
 	}
+	
+	/**
+	 * renvoie vrai si les étapes sont égales
+	 */
+	@Override
+	public boolean equals(Object e) {
+		
+		return element.equals(((Etape<E>) e).element());
+		
+	}
+	
+	/**
+	 * renvoie l'id de marquage
+	 */
+	@Override
+	public int hashCode() {
+		
+		return element.hashCode();
+	}
 }

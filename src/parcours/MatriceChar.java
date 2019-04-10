@@ -1,5 +1,6 @@
 package parcours;
 
+import parcours.Position;
 import structuresLineaires.Liste;
 import structuresLineaires.ListeChainee;
 import structuresLineaires.ListeTableau;
@@ -126,19 +127,29 @@ public class MatriceChar implements Explorable<Position> {
 	public Liste<Position> etapesSuivantes(Position position) {
 
 		Liste<Position> etapesSuivantes = new ListeChainee<>();
+		Position p;
+		
 
-		etapesSuivantes.ajouter(1, new Position(position.getX() + 1, position.getY()));
-		etapesSuivantes.ajouter(1, new Position(position.getX(), position.getY() + 1));
-		etapesSuivantes.ajouter(1, new Position(position.getX() - 1, position.getY()));
-		etapesSuivantes.ajouter(1, new Position(position.getX(), position.getY() - 1));
-		for (int i = 1; i < etapesSuivantes.longueur() + 1; i++) {
-			if (isOut(etapesSuivantes.ieme(i)))
-				etapesSuivantes.supprimer(i);
-			else if (estMur(etapesSuivantes.ieme(i))) {
-				etapesSuivantes.supprimer(i);
-			}
-
+		p= new Position(position.getX()+1,position.getY());
+		if(!(isOut(p))){
+			if(!(estMur(p))) etapesSuivantes.ajouter(1,p);
 		}
+		p=new Position(position.getX(),position.getY()+1);
+		if(!(isOut(p))){
+			if(!(estMur(p))) etapesSuivantes.ajouter(1,p);
+		}
+		
+		p=new Position(position.getX()-1,position.getY());
+
+		if(!(isOut(p))){
+			if(!(estMur(p))) etapesSuivantes.ajouter(1,p);
+		}
+		
+		p=new Position(position.getX(),position.getY()-1);
+		if(!(isOut(p))){
+			if(!(estMur(p))) etapesSuivantes.ajouter(1,p);
+		}
+		 p=null;
 		return etapesSuivantes;
 	}
 

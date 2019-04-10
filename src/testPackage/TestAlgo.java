@@ -10,11 +10,14 @@ public class TestAlgo {
 
 	public static void main(String[] args) {
 
+		
 		Position debut = new Position(0,0);
 		Position fin = new Position(4,4);
 		
 		MatriceChar matrice = new MatriceChar(5,5,debut,fin);
 		
+		
+		// on crée un mur de position
 		ListeChainee<Position> murs = new ListeChainee<>();
 		
 		murs.ajouterFinDeListe(new Position(1,2));
